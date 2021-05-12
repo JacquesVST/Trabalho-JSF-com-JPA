@@ -48,6 +48,9 @@ alter table banda add constraint fk_estilo foreign key (id_estilo) references es
 
 alter table integrante add id_banda int;
 alter table integrante add constraint fk_banda foreign key (id_banda) references banda (id);
+
+update banda set id_estilo=1;
+update integrante set id_banda=1;
 ```
 
 
