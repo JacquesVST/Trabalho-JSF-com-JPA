@@ -14,13 +14,14 @@ import fema.persistence.JpaManager;
 public class BandaDAO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private JpaManager jpaManager;
 
 	@SuppressWarnings("unchecked")
 	public List<Banda> findAll() throws SQLException {
-		Query consulta = jpaManager.getEntityManager().createNativeQuery("select * from banda order by id", Banda.class);
+		Query consulta = jpaManager.getEntityManager().createNativeQuery("select * from banda order by id",
+				Banda.class);
 		return consulta.getResultList();
 	}
 

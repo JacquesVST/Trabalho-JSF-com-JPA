@@ -18,7 +18,7 @@ public class JpaManager implements Serializable {
 
 	public EntityManager getEntityManager() {
 		if (entityManagerFactory == null) {
-			entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+			entityManagerFactory = Persistence.createEntityManagerFactory("persistence-que-funfa");
 		}
 		return entityManagerFactory.createEntityManager();
 	}
