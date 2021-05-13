@@ -1,4 +1,4 @@
-package fema;
+package fema.persistence;
 
 import java.io.Serializable;
 
@@ -14,9 +14,7 @@ public class JpaManager implements Serializable {
 
 	private EntityManagerFactory entityManagerFactory;
 	
-	public JpaManager() {
-		
-	}
+	public JpaManager() {}
 
 	public EntityManager getEntityManager() {
 		if (entityManagerFactory == null) {
