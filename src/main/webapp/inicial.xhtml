@@ -9,6 +9,12 @@
 	<h:form id="form">
 		<h:commandButton actionListener="#{controlador.mostrarDados}"></h:commandButton>
 		<h:dataTable border="1" value="#{controlador.listaBanda}" var="ban" id="tabela">
+		<h:column id="column0">
+				<f:facet name="header">
+					<h:outputText value="ID"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{ban.id}"></h:outputText>
+			</h:column>
 			<h:column id="column1">
 				<f:facet name="header">
 					<h:outputText value="Nome"></h:outputText>

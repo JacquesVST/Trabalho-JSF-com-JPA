@@ -3,5 +3,5 @@
 <Context>
 	<Manager pathname="" />
 	<Resource name="BeanManager" auth="Container"  type="javax.enterprise.inject.spi.BeanManager" factory="org.jboss.weld.resources.ManagerObjectFactory" />
-	<Resource name="jdbc/h2" auth="Container" type="javax.sql.DataSource" driverClassName="org.h2.Driver" url="jdbc:h2:c:/Topicos4bccH2/dados" username="sa" password="" maxTotal="30" maxIdle="3" maxWaitMillis="5" />
+	<Resource name="jdbc/h2" auth="Container" type="javax.sql.DataSource" driverClassName="org.h2.Driver" url="jdbc:h2:c:/Topicos4bccH2/dados-dados" username="sa" password="" maxTotal="30" maxIdle="3" maxWaitMillis="5" />
 </Context>
