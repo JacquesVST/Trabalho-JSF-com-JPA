@@ -14,6 +14,8 @@ public class JpaManager implements Serializable {
 
 	private EntityManagerFactory entityManagerFactory;
 	
+	private EntityManager entityManager;
+	
 	public JpaManager() {
 		
 	}
@@ -22,7 +24,10 @@ public class JpaManager implements Serializable {
 		if (entityManagerFactory == null) {
 			entityManagerFactory = Persistence.createEntityManagerFactory("persistence-dados");
 		}
-		return entityManagerFactory.createEntityManager();
+		if (entityManager == null) {
+			entityManager = entityManagerFactory.createEntityManager();
+		}
+		return entityManager;
 	}
 
 }
