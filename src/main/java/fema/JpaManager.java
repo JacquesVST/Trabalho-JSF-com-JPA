@@ -20,7 +20,7 @@ public class JpaManager implements Serializable {
 
 	public EntityManager getEntityManager() {
 		if (entityManagerFactory == null) {
-			entityManagerFactory = Persistence.createEntityManagerFactory("persistence-foda");
+			entityManagerFactory = Persistence.createEntityManagerFactory("persistence-dados");
 		}
 		return entityManagerFactory.createEntityManager();
 	}
