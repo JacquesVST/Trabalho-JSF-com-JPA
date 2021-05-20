@@ -8,7 +8,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.persistence.Query;
 
-import fema.persistence.JpaManager;
+import fema.JpaManager;
 
 @SessionScoped
 public class EstiloDAO implements Serializable {
@@ -19,10 +19,11 @@ public class EstiloDAO implements Serializable {
 	private JpaManager jpaManager;
 
 	@SuppressWarnings("unchecked")
-	public List<Estilo> findAll() throws SQLException {
-		Query consulta = jpaManager.getEntityManager().createNativeQuery("select * from estilo order by id",
-				Estilo.class);
-		return consulta.getResultList();
+	public List<Estilo> getEstilos() throws SQLException {
+		String query = "select * from estilo";
+		Query consulta = jpaManager.getEntityManager().createNativeQuery(query, Estilo.class);
+		List<Estilo> estilos = consulta.getResultList();
+		return estilos;
 	}
 
 	public Estilo findById(Integer id) throws SQLException {

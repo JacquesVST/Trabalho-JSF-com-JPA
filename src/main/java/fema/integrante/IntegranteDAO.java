@@ -5,26 +5,25 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.persistence.Query;
 
-import fema.persistence.JpaManager;
+import fema.JpaManager;
 
 @SessionScoped
 public class IntegranteDAO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
 	private JpaManager jpaManager;
 
-	public IntegranteDAO(JpaManager jpaManager) {
-		this.jpaManager = jpaManager;
-	}
-
 	@SuppressWarnings("unchecked")
-	public List<Integrante> findAll() throws SQLException {
-		Query consulta = jpaManager.getEntityManager().createNativeQuery("select * from integrante order by id",
-				Integrante.class);
-		return consulta.getResultList();
+	public List<Integrante> getIntegrantes() throws SQLException {
+		String query = "select * from integrante";
+		Query consulta = jpaManager.getEntityManager().createNativeQuery(query, Integrante.class);
+		List<Integrante> integrantes = consulta.getResultList();
+		return integrantes;
 	}
 
 	public Integrante findById(Integer id) throws SQLException {

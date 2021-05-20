@@ -11,7 +11,8 @@
 		</properties>
 	</persistence-unit>
 	
-	    <persistence-unit name="persistence-que-funfa" transaction-type="RESOURCE_LOCAL">
+	<!-- TO-DO: Remover -->
+	<persistence-unit name="persistence-dados" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.h2.Driver" />

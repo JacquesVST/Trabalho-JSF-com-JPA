@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@JacquesVST 
+JacquesVST
+/
+Trabalho-JSF-com-JPA
+2
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Trabalho-JSF-com-JPA/.gitignore
+@JacquesVST
+JacquesVST gitignore but better
+Latest commit e8edf00 7 days ago
+ History
+ 1 contributor
+164 lines (124 sloc)  2.23 KB
+  
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -162,3 +193,16 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

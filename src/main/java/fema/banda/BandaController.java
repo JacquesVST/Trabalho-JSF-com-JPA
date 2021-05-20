@@ -18,38 +18,62 @@ public class BandaController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private List<Banda> bandas = new ArrayList<Banda>();
+
 	private Banda banda = new Banda();
 	private Estilo estilo = new Estilo();
-	private List<Estilo> estilos = new ArrayList<Estilo>();
-	private Boolean showTable;
+
+	private Boolean mostrarTabela = true;
+
 	@Inject
 	private BandaDAO bandaDAO;
 	@Inject
 	private EstiloDAO estiloDAO;
 
-	public void addBanda() {
+	public void listarBandas() {
 		try {
-			this.showTable = false;
-			this.estilo = this.estiloDAO.findAll().stream().filter(e -> e.getId().equals(this.estilo.getId()))
-					.findFirst().get();
-			this.banda.setEstilo(this.estilo);
-			this.bandaDAO.save(this.banda);
-			this.banda = new Banda();
-			this.estilo = new Estilo();
-			this.showTable = true;
+			this.mostrarTabela = false;
+			bandas = this.bandaDAO.getBandas();
+			this.mostrarTabela = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void deleteBanda(Banda banda) {
+	public void adicionarBanda() {
 		try {
-			this.showTable = false;
-			this.bandaDAO.delete(banda);
-			this.showTable = true;
+			this.mostrarTabela = false;
+			this.estilo = estiloDAO.getEstilos().stream().filter(e -> e.getId().equals(this.estilo.getId())).findFirst()
+					.get();
+			this.banda.setEstilo(this.estilo);
+			this.bandaDAO.save(banda);
+			this.banda = new Banda();
+			this.estilo = new Estilo();
+			this.mostrarTabela = true;
+			this.listarBandas();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void removerBanda(Banda banda) {
+		try {
+			this.mostrarTabela = false;
+			this.bandaDAO.delete(banda);
+			this.mostrarTabela = true;
+			this.listarBandas();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Banda> getBandas() {
+		this.listarBandas();
+		return bandas;
+	}
+
+	public void setBandas(List<Banda> bandas) {
+		this.bandas = bandas;
 	}
 
 	public Banda getBanda() {
@@ -68,20 +92,12 @@ public class BandaController implements Serializable {
 		this.estilo = estilo;
 	}
 
-	public List<Estilo> getEstilos() {
-		return estilos;
+	public Boolean getMostrarTabela() {
+		return mostrarTabela;
 	}
 
-	public void setEstilos(List<Estilo> estilos) {
-		this.estilos = estilos;
-	}
-
-	public Boolean getShowTable() {
-		return showTable;
-	}
-
-	public void setShowTable(Boolean showTable) {
-		this.showTable = showTable;
+	public void setMostrarTabela(Boolean mostrarTabela) {
+		this.mostrarTabela = mostrarTabela;
 	}
 
 	public BandaDAO getBandaDAO() {
@@ -99,5 +115,4 @@ public class BandaController implements Serializable {
 	public void setEstiloDAO(EstiloDAO estiloDAO) {
 		this.estiloDAO = estiloDAO;
 	}
-
 }

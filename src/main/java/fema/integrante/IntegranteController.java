@@ -1,6 +1,5 @@
 package fema.integrante;
 
-
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,41 +17,61 @@ import fema.banda.BandaDAO;
 public class IntegranteController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
+	private List<Integrante> integrantes = new ArrayList<Integrante>();
+
 	private Integrante integrante = new Integrante();
 	private Banda banda = new Banda();
-	private List<Banda> bandas = new ArrayList<Banda>();
-	private Boolean showTable;
+
+	private Boolean mostrarTabela = true;
+
 	@Inject
 	private IntegranteDAO integranteDAO;
 	@Inject
 	private BandaDAO bandaDAO;
 
-	public void addIntegrante() {
+	public void listarIntegrantes() {
 		try {
-			this.showTable = false;
-			this.banda = this.bandaDAO.findAll().stream()
-					.filter(b -> b.getId().equals(this.banda.getId()))
-					.findFirst()
-					.get();
-			this.integrante.setBanda(this.banda);
-			this.integranteDAO.save(this.integrante);
-			this.integrante = new Integrante();
-			this.banda = new Banda();
-			this.showTable = true;
+			this.mostrarTabela = false;
+			this.integrantes = this.integranteDAO.getIntegrantes();
+			this.mostrarTabela = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void removeIntegrante(Integrante integrante) {
+	public void adicionarIntegrante() {
 		try {
-			this.showTable = false;
-			this.integranteDAO.delete(integrante);
-			this.showTable = true;
+			this.mostrarTabela = false;
+			this.banda = this.bandaDAO.getBandas().stream().filter(b -> b.getId().equals(this.banda.getId()))
+					.findFirst().get();
+			this.integrante.setBanda(this.banda);
+			this.integranteDAO.save(this.integrante);
+			this.integrante = new Integrante();
+			this.banda = new Banda();
+			this.mostrarTabela = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void removerIntegrante(Integrante integrante) {
+		try {
+			this.mostrarTabela = false;
+			this.integranteDAO.delete(integrante);
+			this.mostrarTabela = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Integrante> getIntegrantes() {
+		this.listarIntegrantes();
+		return integrantes;
+	}
+
+	public void setIntegrantes(List<Integrante> integrantes) {
+		this.integrantes = integrantes;
 	}
 
 	public Integrante getIntegrante() {
@@ -71,20 +90,12 @@ public class IntegranteController implements Serializable {
 		this.banda = banda;
 	}
 
-	public List<Banda> getBandas() {
-		return bandas;
+	public Boolean getMostrarTabela() {
+		return mostrarTabela;
 	}
 
-	public void setBandas(List<Banda> bandas) {
-		this.bandas = bandas;
-	}
-
-	public Boolean getShowTable() {
-		return showTable;
-	}
-
-	public void setShowTable(Boolean showTable) {
-		this.showTable = showTable;
+	public void setMostrarTabela(Boolean mostrarTabela) {
+		this.mostrarTabela = mostrarTabela;
 	}
 
 	public IntegranteDAO getIntegranteDAO() {
@@ -102,5 +113,5 @@ public class IntegranteController implements Serializable {
 	public void setBandaDAO(BandaDAO bandaDAO) {
 		this.bandaDAO = bandaDAO;
 	}
-	
+
 }
