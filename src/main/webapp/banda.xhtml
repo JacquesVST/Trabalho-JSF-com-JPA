@@ -1,11 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<title>Banda</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 <h:body>
+	<h1>Banda</h1>
 
+	<br></br>
+
+	<h:form id="form">
+		<h:commandButton value="Estilo"
+			action="#{controlador.irParaPagina('estilo')}">
+		</h:commandButton>
+		<h:commandButton value="Banda"
+			action="#{controlador.irParaPagina('banda')}">
+		</h:commandButton>
+		<h:commandButton value="Integrante"
+			action="#{controlador.irParaPagina('integrante')}">
+		</h:commandButton>
+
+		<br></br>
+		<br></br>
+		
+		Nome: <br></br>
+		<h:inputText value="#{bandaController.banda.nome}"></h:inputText>
+		<br></br>
+		Origem: <br></br>
+		<h:inputText value="#{bandaController.banda.origem}"></h:inputText>
+
+		<br></br>
+		<br></br>
+		
+		Estilo: <br></br>
+		<h:selectOneMenu value="#{bandaController.estilo.id}" onclick="#{estilo}">
+			<f:selectItems var="estiloItem"
+				value="#{estiloController.estilos}"
+				itemValue="#{estiloItem.id}" itemLabel="#{estiloItem.nome}">
+			</f:selectItems>
+		</h:selectOneMenu>
+
+		<br></br>
+		<br></br>
+
+		<h:commandButton value="Adicionar Banda"
+			action="#{bandaController.adicionarBanda()}">
+			<f:ajax execute="@form" render="@form"></f:ajax>
+		</h:commandButton>
+
+		<br></br>
+		<br></br>
+
+		<h:dataTable rendered="#{bandaController.mostrarTabela}" border="1"
+			value="#{bandaController.bandas}" var="bandaTabela"
+			id="tabela">
+			<h:column id="column1">
+				<f:facet name="header">
+					<h:outputText value="ID"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{bandaTabela.id}"></h:outputText>
+			</h:column>
+			<h:column id="column2">
+				<f:facet name="header">
+					<h:outputText value="Nome"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{bandaTabela.nome}"></h:outputText>
+			</h:column>
+			<h:column id="column3">
+				<f:facet name="header">
+					<h:outputText value="Origem"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{bandaTabela.origem}"></h:outputText>
+			</h:column>
+			<h:column id="column4">
+				<f:facet name="header">
+					<h:outputText value="Estilo"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{bandaTabela.estilo.nome}"></h:outputText>
+			</h:column>
+			<h:column id="column5">
+				<f:facet name="header">
+					<h:outputText value="Ação"></h:outputText>
+				</f:facet>
+				<h:commandButton value="Excluir"
+					action="#{bandaController.removerBanda(bandaTabela)}">
+					<f:ajax execute="tabela" render="tabela"></f:ajax>
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
 </h:body>
 </html>

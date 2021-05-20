@@ -1,11 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<title>Integrante</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 <h:body>
+	<h1>Integrante</h1>
 
+	<br></br>
+
+	<h:form id="form">
+		<h:commandButton value="Estilo"
+			action="#{controlador.irParaPagina('estilo')}">
+		</h:commandButton>
+		<h:commandButton value="Banda"
+			action="#{controlador.irParaPagina('banda')}">
+		</h:commandButton>
+		<h:commandButton value="Integrante"
+			action="#{controlador.irParaPagina('integrante')}">
+		</h:commandButton>
+
+		<br></br>
+		<br></br>
+		
+		Nome: <br></br>
+		<h:inputText value="#{integranteController.integrante.nome}"></h:inputText>
+		<br></br>
+		Data Nascimento: <br></br>
+		<h:inputText value="#{integranteController.integrante.dataNascimento}"></h:inputText>
+
+		<br></br>
+		<br></br>
+		
+		Banda: <br></br>
+		<h:selectOneMenu value="#{integranteController.banda.id}">
+			<f:selectItems var="bandaItem"
+				value="#{bandaController.bandas}"
+				itemValue="#{bandaItem.id}" itemLabel="#{bandaItem.nome}">
+			</f:selectItems>
+		</h:selectOneMenu>
+
+		<br></br>
+		<br></br>
+
+		<h:commandButton value="Adicionar Integrante"
+			action="#{integranteController.adicionarIntegrante()}">
+			<f:ajax execute="@form" render="@form"></f:ajax>
+		</h:commandButton>
+
+		<br></br>
+		<br></br>
+
+		<h:dataTable rendered="#{integranteController.mostrarTabela}" border="1"
+			value="#{integranteController.integrantes}" var="integranteTabela"
+			id="tabela">
+			<h:column id="column1">
+				<f:facet name="header">
+					<h:outputText value="ID"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{integranteTabela.id}"></h:outputText>
+			</h:column>
+			<h:column id="column2">
+				<f:facet name="header">
+					<h:outputText value="Nome"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{integranteTabela.nome}"></h:outputText>
+			</h:column>
+			<h:column id="column3">
+				<f:facet name="header">
+					<h:outputText value="Data Nascimento"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{integranteTabela.dataNascimento}"></h:outputText>
+			</h:column>
+			<h:column id="column4">
+				<f:facet name="header">
+					<h:outputText value="Banda"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{integranteTabela.banda.nome}"></h:outputText>
+			</h:column>
+			<h:column id="column5">
+				<f:facet name="header">
+					<h:outputText value="Ação"></h:outputText>
+				</f:facet>
+				<h:commandButton value="Excluir"
+					action="#{integranteController.removerIntegrante(integranteTabela)}">
+					<f:ajax execute="tabela" render="tabela"></f:ajax>
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
 </h:body>
 </html>
