@@ -11,14 +11,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+	<style>
+.id, .acao {
+	width: 100px;
+}
+</style>
 </h:head>
 <h:body>
 	<div class="section">
 		<div class="container">
+			<h1 class="title">Trabalho JSF + JPA</h1>
+			<h2 class="subtitle">
+				Contexo: <i>Grupo musical</i>
+			</h2>
 
 			<div class="block buttons has-addons">
 				<h:button value="Estilo" outcome="estilo"
-					class="button is-link is-selected" />
+					class="button is-link is-selected is-light" />
 				<h:button value="Banda" outcome="banda" class="button" />
 				<h:button value="Integrante" outcome="integrante" class="button" />
 			</div>
@@ -41,16 +50,24 @@
 						</div>
 					</div>
 
-					<h:commandButton value="Adicionar" class="button is-primary"
-						action="#{estiloController.adicionarEstilo()}">
-						<f:ajax execute="@form" render="@form"></f:ajax>
-					</h:commandButton>
+					<div class="level">
+						<div class="level-left"></div>
+						<div class="level-right">
+							<div class="level-item">
+								<h:commandButton value="Adicionar"
+									class="button is-primary is-light"
+									action="#{estiloController.adicionarEstilo()}">
+									<f:ajax execute="@form" render="@form"></f:ajax>
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
 				</div>
-
 
 				<h:dataTable rendered="#{estiloController.mostrarTabela}"
 					class="table is-fullwidth is-narrow"
-					value="#{estiloController.estilos}" var="estiloTabela" id="tabela">
+					value="#{estiloController.estilos}" var="estiloTabela" id="tabela"
+					columnClasses="id,nome,bpm,acao">
 					<h:column id="column1">
 						<f:facet name="header">
 							<h:outputText value="ID"></h:outputText>
