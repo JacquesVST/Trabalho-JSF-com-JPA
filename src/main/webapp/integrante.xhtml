@@ -8,84 +8,102 @@
 <h:head>
 	<title>Integrante</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
 </h:head>
 <h:body>
-	<h1>Integrante</h1>
+	<div class="section">
+		<div class="container">
 
-	<br></br>
+			<div class="block buttons has-addons">
+				<h:button value="Estilo" outcome="estilo" class="button" />
+				<h:button value="Banda" outcome="banda" class="button" />
+				<h:button value="Integrante" outcome="integrante"
+					class="button is-link is-selected" />
+			</div>
 
-	<h:form id="form">
-		<h:button value = "Estilo" outcome = "estilo" />
-		<h:button value = "Banda" outcome = "banda" />
-		<h:button value = "Integrante" outcome = "integrante" />
-		<br></br>
-		<br></br>
-		
-		Nome: <br></br>
-		<h:inputText value="#{integranteController.integrante.nome}"></h:inputText>
-		<br></br>
-		Data Nascimento: <br></br>
-		<h:inputText value="#{integranteController.integrante.dataNascimento}"></h:inputText>
 
-		<br></br>
-		<br></br>
-		
-		Banda: <br></br>
-		<h:selectOneMenu value="#{integranteController.banda.id}">
-			<f:selectItems var="bandaItem"
-				value="#{bandaController.bandas}"
-				itemValue="#{bandaItem.id}" itemLabel="#{bandaItem.nome}">
-			</f:selectItems>
-		</h:selectOneMenu>
+			<h:form id="form" class="block">
 
-		<br></br>
-		<br></br>
+				<div class="block">
+					<div class="field">
+						<label class="label">Nome</label>
+						<div class="control">
+							<h:inputText class="input"
+								value="#{integranteController.integrante.nome}"></h:inputText>
+						</div>
+					</div>
 
-		<h:commandButton value="Adicionar Integrante"
-			action="#{integranteController.adicionarIntegrante()}">
-			<f:ajax execute="@form" render="@form"></f:ajax>
-		</h:commandButton>
+					<div class="field">
+						<label class="label">Data Nascimento</label>
+						<div class="control">
+							<h:inputText class="input"
+								value="#{integranteController.integrante.dataNascimento}"></h:inputText>
+						</div>
+					</div>
 
-		<br></br>
-		<br></br>
+					<div class="field">
+						<label class="label">Banda</label>
+						<div class="control is-expanded">
+							<div class="select is-fullwidth">
+								<h:selectOneMenu value="#{integranteController.banda.id}">
+									<f:selectItems var="bandaItem"
+										value="#{bandaController.bandas}" itemValue="#{bandaItem.id}"
+										itemLabel="#{bandaItem.nome}">
+									</f:selectItems>
+								</h:selectOneMenu>
+							</div>
+						</div>
+					</div>
 
-		<h:dataTable rendered="#{integranteController.mostrarTabela}" border="1"
-			value="#{integranteController.integrantes}" var="integranteTabela"
-			id="tabela">
-			<h:column id="column1">
-				<f:facet name="header">
-					<h:outputText value="ID"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{integranteTabela.id}"></h:outputText>
-			</h:column>
-			<h:column id="column2">
-				<f:facet name="header">
-					<h:outputText value="Nome"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{integranteTabela.nome}"></h:outputText>
-			</h:column>
-			<h:column id="column3">
-				<f:facet name="header">
-					<h:outputText value="Data Nascimento"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{integranteTabela.dataNascimento}"></h:outputText>
-			</h:column>
-			<h:column id="column4">
-				<f:facet name="header">
-					<h:outputText value="Banda"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{integranteTabela.banda.nome}"></h:outputText>
-			</h:column>
-			<h:column id="column5">
-				<f:facet name="header">
-					<h:outputText value="Ação"></h:outputText>
-				</f:facet>
-				<h:commandButton value="Excluir"
-					action="#{integranteController.removerIntegrante(integranteTabela)}">
-					<f:ajax execute="tabela" render="tabela"></f:ajax>
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
-	</h:form>
+					<h:commandButton value="Adicionar" class="button is-primary"
+						action="#{integranteController.adicionarIntegrante()}">
+						<f:ajax execute="@form" render="@form"></f:ajax>
+					</h:commandButton>
+				</div>
+
+				<h:dataTable rendered="#{integranteController.mostrarTabela}"
+					class="table is-fullwidth is-narrow"
+					value="#{integranteController.integrantes}" var="integranteTabela"
+					id="tabela">
+					<h:column id="column1">
+						<f:facet name="header">
+							<h:outputText value="ID"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{integranteTabela.id}"></h:outputText>
+					</h:column>
+					<h:column id="column2">
+						<f:facet name="header">
+							<h:outputText value="Nome"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{integranteTabela.nome}"></h:outputText>
+					</h:column>
+					<h:column id="column3">
+						<f:facet name="header">
+							<h:outputText value="Data Nascimento"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{integranteTabela.dataNascimento}"></h:outputText>
+					</h:column>
+					<h:column id="column4">
+						<f:facet name="header">
+							<h:outputText value="Banda"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{integranteTabela.banda.nome}"></h:outputText>
+					</h:column>
+					<h:column id="column5">
+						<f:facet name="header">
+							<h:outputText value="Ação"></h:outputText>
+						</f:facet>
+						<h:commandButton value="Excluir"
+							class="button is-danger is-light is-small"
+							action="#{integranteController.removerIntegrante(integranteTabela)}">
+							<f:ajax execute="tabela" render="tabela"></f:ajax>
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</div>
 </h:body>
 </html>
